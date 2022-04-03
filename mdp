@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+A generic Markov process solver
+by Ziyang Zeng (zz2960)
+Spring 2022
+"""
+
+import argparse
+from solving import MarkovNodeInputParser, ParseError, MarkovSolver
+
+
+def main():
+    """
+    Main function
+    """
+    parser = argparse.ArgumentParser(
+        description="A generic Markov process solver.")
+    parser.add_argument(
+        "-d", "--discount", help="a float discount factor [0, 1] to use on future rewards, defaults to 1.0 if not set", type=float, default=1.0)
+    parser.add_argument(
+        "-m", "--min", help="whether to minimize values as costs, defaults to false which maximizes values as rewards", action="store_true", default=False)
+    parser.add_argument(
+        "-t", "--tolerance", help="a float tolerance for convergence, defaults to 0.01 if not set", type=float, default=0.01)
+    parser.add_argument(
+        "-i", "--iteration", help="the maximum number of iterations to run, defaults to 100 if not set", type=int, default=100)
+    parser.add_argument(
+        "inputfile", help="input file path")
+    args = parser.parse_args()
+
+    # Read input file
+    with open(args.inputfile, "r") as f:
+        text = f.read()
+
+    parser = MarkovNodeInputParser()
+    try:
+        node_dict = parser.parse(text)
+    except ParseError as e:
+        print(e)
+        exit(1)
+    solver = MarkovSolver(node_dict, args.discount,
+                          args.min, args.tolerance, args.iteration)
+    solver.solve()
+    solver.print()
+
+
+if __name__ == '__main__':
+    main()
