@@ -79,7 +79,7 @@ class MarkovNodeInputParser:
                 else:
                     raise ParseError(f"Invalid line \"{line}\"")
             except ParseError as e:
-                raise ParseError(f"Error parsing input line {i + 1}: {e}")
+                raise ParseError(f"Line {i + 1}: {e}")
 
     def build_node(self, name: str) -> MarkovNode:
         """

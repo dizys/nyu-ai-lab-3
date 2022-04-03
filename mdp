@@ -37,7 +37,7 @@ def main():
     try:
         node_dict = parser.parse(text)
     except ParseError as e:
-        print(e)
+        print(f"Parse Error: {e}")
         exit(1)
     solver = MarkovSolver(node_dict, args.discount,
                           args.min, args.tolerance, args.iteration)
