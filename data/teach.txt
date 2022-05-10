@@ -1,5 +1,5 @@
 # From http://www.cs.cmu.edu/~cga/ai-course/mdp.pdf
-# use -df of 0.9
+# use -d of 0.9
 
 Assist=20
 Assist : [Assist, Assoc, Street]

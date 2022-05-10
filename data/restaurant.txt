@@ -1,4 +1,5 @@
 # Restaurant example from slides
+# options: -min
 
 Office : [Ind, Chi]
 Ind=5
